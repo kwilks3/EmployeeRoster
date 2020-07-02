@@ -32,10 +32,10 @@ const EmployeeInfo = [
     choices: ["intern", "manager", "engineer"],
   },
 ];
-
+init();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-async function init() {
+const init = async () => {
   const { work } = await inquirer.prompt({
     type: "confirm",
     name: "work",
@@ -44,9 +44,40 @@ async function init() {
   if (work) {
     getEmployeeInfo();
   }
-}
+};
 
-init();
+const getEmployeeInfo = async () => {
+  const { name, id, email, employee } = await inquirer.prompt(EmployeeInfo);
+  switch (employee) {
+    case "intern":
+      const { school } = await inquirer.prompt({
+        type: "input",
+        name: "school",
+        message: "What school do you attend?",
+      });
+      create = new Intern(name, id, email, school);
+      break;
+
+    case "engineer":
+      const { github } = await inquirer.prompt({
+        type: "input",
+        name: "github",
+        message: "What is your GitHub?",
+      });
+      create = new Engineer(name, id, email, github);
+      break;
+
+    case "manager":
+      const { officeNumber } = await inquirer.prompt({
+        type: "input",
+        name: "officeNumber",
+        message: "What is your office number?",
+      });
+      create = new Manager(name, id, email, officeNumber);
+      break;
+  }
+};
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
