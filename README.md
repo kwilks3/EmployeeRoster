@@ -14,6 +14,10 @@ Then, simply fill in all the prompts!
 
 Watch the demo [here.](https://gifs.com/gif/employee-roster-demo-q7qNVy)
 
+## Testing
+
+To run the tests for this file run npm test.
+
 ## License
 
 MIT
